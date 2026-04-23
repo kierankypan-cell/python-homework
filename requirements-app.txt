@@ -1,0 +1,5 @@
+pandas==2.3.3
+SQLAlchemy==2.0.48
+PyMySQL==1.1.2
+openpyxl==3.1.5
+python-dotenv==1.2.2

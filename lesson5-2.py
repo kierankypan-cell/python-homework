@@ -1,24 +1,29 @@
 # ============================================================
-# 配置区 —— 所有账号信息统一在此修改
-# ============================================================
-DB_HOST     = "192.168.40.83"
-DB_PORT     = 3306
-DB_USER     = "student"
-DB_PASSWORD = "mlbb2026"   # ← 在这里填入你的密码
-DB_NAME     = "homework_db"
-
-# 分析结果配置
-MIN_GAMES   = 30                     # 最低场次门槛
-OUTPUT_FILE = "hero_winrate.xlsx"    # 导出文件名
-ANALYST     = "潘柯岩"             # ← 在这里填入你自己的名字
-
-# ============================================================
 # 导入依赖
 # ============================================================
+import os
 import pandas as pd
 from datetime import datetime
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
+from dotenv import load_dotenv
+
+# 加载 .env 文件中的环境变量（文件不存在时静默跳过）
+load_dotenv()
+
+# ============================================================
+# 配置区 —— 敏感信息从环境变量读取，其余参数在此修改
+# ============================================================
+DB_HOST     = os.environ.get("DB_HOST",     "192.168.40.83")
+DB_PORT     = int(os.environ.get("DB_PORT", "3306"))
+DB_USER     = os.environ.get("DB_USER",     "student")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
+DB_NAME     = os.environ.get("DB_NAME",     "homework_db")
+
+# 分析结果配置
+MIN_GAMES   = 30                     # 最低场次门槛
+OUTPUT_FILE = "hero_winrate.xlsx"    # 导出文件名
+ANALYST     = os.environ.get("ANALYST", "潘柯岩")
 
 
 # ============================================================
